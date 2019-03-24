@@ -213,7 +213,13 @@ var NeuralNetwork = function () {
         input = _lookup3.default.toArray(this.inputLookup, input, this.inputLookupLength);
       }
 
-      var output = this.runInput(input).slice(0);
+      var outputToBeSliced = this.runInput(input);
+
+      if(!Array.isArray(outputToBeSliced)) {
+        outputToBeSliced = Object.values(outputToBeSliced);
+      }
+
+      var output = outputToBeSliced.slice(0);
 
       if (this.outputLookup) {
         output = _lookup3.default.toObject(this.outputLookup, output);

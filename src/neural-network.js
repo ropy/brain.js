@@ -179,7 +179,13 @@ export default class NeuralNetwork {
       input = lookup.toArray(this.inputLookup, input, this.inputLookupLength);
     }
 
-    let output = this.runInput(input).slice(0);
+    let outputToBeSliced = this.runInput(input);
+
+    if(!Array.isArray(outputToBeSliced)) {
+      outputToBeSliced = Object.values(outputToBeSliced);
+    }
+
+    let output = outputToBeSliced.slice(0);
 
     if (this.outputLookup) {
       output = lookup.toObject(this.outputLookup, output);
